@@ -1,0 +1,5 @@
+.ipynb_checkpoints
+.venv
+*.gz
+ny_taxi_pg_data
+*.csv

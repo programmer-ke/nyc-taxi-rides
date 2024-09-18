@@ -8,14 +8,14 @@ terraform {
 }
 
 provider "google" {
-  project = "ny-taxi-rides-435804"
-  region  = "me-central1"
+  project = var.project
+  region  = var.location
 }
 
 
 resource "google_storage_bucket" "demo-bucket" {
-  name          = "demo-bucket-ny-taxi-rides-435804"
-  location      = "me-central1"
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
 
   lifecycle_rule {
@@ -26,4 +26,9 @@ resource "google_storage_bucket" "demo-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "dataset" {
+  dataset_id = var.bq_dataset_name
+  location   = var.location
 }
